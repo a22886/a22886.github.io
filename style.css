@@ -1,0 +1,33 @@
+h1 {
+    color: blue;
+    font-size: 20px;
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+
+}
+
+.uuu {}
+
+/* uuu is class name; use <p class="uuu"> to apply this style */
+#aaa {}
+
+/* aaa is id name; use <p id="aaa"> to apply this style */
+body {
+    background-image: url("");
+}
+
+a:link {
+    color: blue;
+}
+
+a:visited {
+    color: blue;
+}
+
+a:hover {
+    color: red;
+}
+
+a:active {
+    color: blue;
+}

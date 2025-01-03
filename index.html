@@ -1,14 +1,32 @@
 <html>
 
 <head>
-    <title>123456</title>
+    <title>Introduction to html</title>
+    <link rel="stylesheet" type="text/css" href="style.css"><!--This is external style sheet-->
+    <style>
+        h5 {
+            color: blue
+        }
+    </style><!--This is internal style sheet-->
 </head>
 
 <body>
-    <h1>Home</h1>
-    <p>Hello world</p>
-    <p>This is a22886 speaking</p>
-    <p><a href="/a">About</a></p>
+    <h1>This is a heading.</h1>
+    <p>This is a paragraph.</p>
+    <p><a href="/a">This is a hyperref.</a></p>
+    <div id="aaa" class="uuu" style="color:red"><!--This is inline style-->
+        <h2>This is a subheading.</h2>
+        <img src="url" alt="text" width="104" height="142">
+        <p id="demo">1231231</p>
+        <script>
+            function f() {
+                document.getElementById("demo").innerHTML = "Hello JavaScript!";
+            }
+        </script>
+        <button type="button" onclick="f()">Click me!</button>
+        <input type="text" name="name" value="Default value" placeholder="Enter your name">
+    </div>
+
 </body>
 
 </html>

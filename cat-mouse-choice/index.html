@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat and Mouse Choice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>猫和老鼠测试（均来源于B站旧版）</h1>
+    <div id="questions-container"></div>
+    <script>
+    // Data for multiple questions
+    const questions = [
+        { gif: 'output.gif', id: 1 },
+        { gif: 'output.gif', id: 2 },
+        { gif: 'output.gif', id: 3 }
+    ];
+
+    const container = document.getElementById('questions-container');
+
+    questions.forEach((q, idx) => {
+        const div = document.createElement('div');
+        div.className = 'container';
+        div.innerHTML = `
+            <div class="gif-container">
+                <img src="${q.gif}" alt="Cat and Mouse GIF">
+            </div>
+            <form class="blanks-form" data-qid="${q.id}">
+                <p style="font-size:1.2em; margin: 24px 0;">
+                    From the
+                    <input type="text" name="episode" class="blank-input" size="6" autocomplete="off" required>
+                    episode and
+                    <input type="text" name="minutes" class="blank-input" size="4" autocomplete="off" required>
+                    minutes
+                    <input type="text" name="seconds" class="blank-input" size="4" autocomplete="off" required>
+                    seconds.
+                </p>
+                <button type="submit">Submit</button>
+            </form>
+            <div class="result"></div>
+        `;
+        container.appendChild(div);
+    });
+
+    // Delegate form submission handling
+    container.addEventListener('submit', function(event) {
+        if (event.target.classList.contains('blanks-form')) {
+            event.preventDefault();
+            const form = event.target;
+            const episode = form.elements['episode'].value.trim();
+            const minutes = form.elements['minutes'].value.trim();
+            const seconds = form.elements['seconds'].value.trim();
+            const resultDiv = form.parentElement.querySelector('.result');
+            resultDiv.textContent = `You entered: Episode ${episode}, ${minutes} minutes, ${seconds} seconds.`;
+        }
+    });
+    </script>
+</body>
+</html>

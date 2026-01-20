@@ -93,9 +93,9 @@
         if (event.target.classList.contains('blanks-form')) {
             event.preventDefault();
             const form = event.target;
-            const episode = form.elements['episode'].value.trim();
-            const minutes = form.elements['minutes'].value.trim();
-            const seconds = form.elements['seconds'].value.trim();
+            const episode = parseInt(form.elements['episode'].value.trim(), 10);
+            const minutes = parseInt(form.elements['minutes'].value.trim(), 10);
+            const seconds = parseInt(form.elements['seconds'].value.trim(), 10);
             const resultDiv = form.parentElement.querySelector('.result');
             if (episode == cur && Math.abs(minutes * 60 + seconds - questions[cur - 1]["seconds"]) < 2) resultDiv.textContent = `You entered: Episode ${episode}, ${minutes} minutes, ${seconds} seconds: Correct!`;
             else resultDiv.textContent = `You entered: Episode ${episode}, ${minutes} minutes, ${seconds} seconds: Wrong!`;

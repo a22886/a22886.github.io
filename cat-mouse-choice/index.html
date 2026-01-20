@@ -8,41 +8,86 @@
 </head>
 <body>
     <h1>猫和老鼠测试（均来源于B站旧版）</h1>
-    <div id="questions-container"></div>
+    <div id="questions-container">
+        <div class="gif-container" id="gif-container">
+            <img src="output01.gif" alt="Cat and Mouse GIF">
+        </div>
+        <form class="blanks-form">
+            <p style="font-size:1.2em; margin: 24px 0;">
+                来自第
+                <input type="text" name="episode" class="blank-input" size="6" autocomplete="off" placeholder="episode" required>
+                集的第
+                <input type="text" name="minutes" class="blank-input" size="4" autocomplete="off" placeholder="minute" required>
+                分
+                <input type="text" name="seconds" class="blank-input" size="4" autocomplete="off" placeholder="second" required>
+                秒。
+            </p>
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </form>
+        <div class="result"></div>
+    </div>
     <script>
     // Data for multiple questions
     const questions = [
-        { gif: 'output.gif', id: 1 },
-        { gif: 'output.gif', id: 2 },
-        { gif: 'output.gif', id: 3 }
+        {episode: 1, seconds: 285},
+        {episode: 2, seconds: 236},
+        {episode: 3, seconds: 302},
+        {episode: 4, seconds: 42},
+        {episode: 5, seconds: 318},
+        {episode: 6, seconds: 323},
+        {episode: 7, seconds: 71},
+        {episode: 8, seconds: 117},
+        {episode: 9, seconds: 256},
+        {episode: 10, seconds: 309},
+        {episode: 11, seconds: 69},
+        {episode: 12, seconds: 230},
+        {episode: 13, seconds: 59},
+        {episode: 14, seconds: 314},
+        {episode: 15, seconds: 114},
+        {episode: 16, seconds: 199},
+        {episode: 17, seconds: 316},
+        {episode: 18, seconds: 138},
+        {episode: 19, seconds: 210},
+        {episode: 20, seconds: 57},
+        {episode: 21, seconds: 318},
+        {episode: 22, seconds: 159},
+        {episode: 23, seconds: 144},
+        {episode: 24, seconds: 289},
+        {episode: 25, seconds: 306},
+        {episode: 26, seconds: 141},
+        {episode: 27, seconds: 277},
+        {episode: 28, seconds: 180},
+        {episode: 29, seconds: 188},
+        {episode: 30, seconds: 203},
+        {episode: 31, seconds: 48},
+        {episode: 32, seconds: 235},
+        {episode: 33, seconds: 321},
+        {episode: 34, seconds: 73},
+        {episode: 35, seconds: 245},
+        {episode: 36, seconds: 251},
+        {episode: 37, seconds: 110},
+        {episode: 38, seconds: 327},
+        {episode: 39, seconds: 112},
+        {episode: 40, seconds: 65},
+        {episode: 41, seconds: 303},
+        {episode: 42, seconds: 300},
+        {episode: 43, seconds: 292},
+        {episode: 44, seconds: 285},
+        {episode: 45, seconds: 130},
+        {episode: 46, seconds: 276},
+        {episode: 47, seconds: 115},
+        {episode: 48, seconds: 218},
+        {episode: 49, seconds: 61},
+        {episode: 50, seconds: 170},
+        {episode: 51, seconds: 142},
+        {episode: 52, seconds: 148},
+        {episode: 53, seconds: 74},
+        {episode: 54, seconds: 299},
+        {episode: 55, seconds: 104}
     ];
-
+    var cur = 1;
     const container = document.getElementById('questions-container');
-
-    questions.forEach((q, idx) => {
-        const div = document.createElement('div');
-        div.className = 'container';
-        div.innerHTML = `
-            <div class="gif-container">
-                <img src="${q.gif}" alt="Cat and Mouse GIF">
-            </div>
-            <form class="blanks-form" data-qid="${q.id}">
-                <p style="font-size:1.2em; margin: 24px 0;">
-                    From the
-                    <input type="text" name="episode" class="blank-input" size="6" autocomplete="off" required>
-                    episode and
-                    <input type="text" name="minutes" class="blank-input" size="4" autocomplete="off" required>
-                    minutes
-                    <input type="text" name="seconds" class="blank-input" size="4" autocomplete="off" required>
-                    seconds.
-                </p>
-                <button type="submit">Submit</button>
-            </form>
-            <div class="result"></div>
-        `;
-        container.appendChild(div);
-    });
-
     // Delegate form submission handling
     container.addEventListener('submit', function(event) {
         if (event.target.classList.contains('blanks-form')) {
@@ -52,8 +97,13 @@
             const minutes = form.elements['minutes'].value.trim();
             const seconds = form.elements['seconds'].value.trim();
             const resultDiv = form.parentElement.querySelector('.result');
-            resultDiv.textContent = `You entered: Episode ${episode}, ${minutes} minutes, ${seconds} seconds.`;
+            if (episode == cur && Math.abs(minutes * 60 + seconds - questions[cur - 1]["seconds"]) < 2) resultDiv.textContent = `You entered: Episode ${episode}, ${minutes} minutes, ${seconds} seconds: Correct!`;
+            else resultDiv.textContent = `You entered: Episode ${episode}, ${minutes} minutes, ${seconds} seconds: Wrong!`;
         }
+    });
+    container.addEventListener('reset', function(event) {
+        cur = Math.floor(Math.random() * 55 + 1);
+        document.getElementById("gif-container").innerHTML = `<img src="output${cur}.gif" alt=\"Cat and Mouse GIF\">`;
     });
     </script>
 </body>
